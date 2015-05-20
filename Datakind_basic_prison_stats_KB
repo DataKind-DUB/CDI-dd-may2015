@@ -1,0 +1,125 @@
+prison_excel = read.csv("DKDUB_CDI_survey_results_LK.csv",na.strings= c("999", NA, " ", ""))
+
+# How to satisfied I am with how often I get to see my family
+prison_excel_sat_visits<-data.frame(prison_excel$Participant,prison_excel$How_satisfied_visit)  # Pulls out columns "Participant number" and "How satisfied" only
+unique_satisfied_visits<-unique(prison_excel_sat_visits)   #Removes dublicates (so parent of multple children only counted once)
+satisfied_table_visits<-table(unique_satisfied_visits[2],exclude = NULL)  #Put into table and plot
+barplot(satisfied_table_visits,names.arg=c(1,2,3,4,5,"NA"),xlab="How to satisfied I am with how often I get to see my family", ylab="Number of Responses",col="cornflowerblue")
+
+# Percentage that gave rating 1-2 or 3-5 for How to satisfied I am with how often I get to see my family
+sum_dissat<-sum(satisfied_table_visits[1:2])  # Sums number of participants that scored 1 or 2
+sum_sat<-sum(satisfied_table_visits[3:5])  # Sums number of participants that scored 3, 4 or 5
+sum_total<-sum(satisfied_table_visits[1:5]) # Sums number of participants who answered this question
+sum_percent<-sum_dissat*100/sum_total  # Work out percentages
+sum_percent_sat<-sum_sat*100/sum_total
+
+# How happy I am with how much contact I have with my family outside of visits?
+prison_excel_sat_contact<-data.frame(prison_excel$Participant,prison_excel$How_satisfied_contact)
+unique_satisfied_contact<-unique(prison_excel_sat_contact)
+satisfied_table_contact<-table(unique_satisfied_contact[2],exclude = NULL)
+barplot(satisfied_table_contact,names.arg=c(1,2,3,4,5,"NA"),xlab="How happy I am with how much contact I have with my family outside of visits", ylab="Number of Responses",col="cornflowerblue")
+
+# Percentage that gave rating 1-2 or 3-5 for How happy I am with how much contact I have with my family outside of visits?
+sum_dissat<-sum(satisfied_table_contact[1:2])
+sum_sat<-sum(satisfied_table_contact[3:5])
+sum_total<-sum(satisfied_table_contact[1:5])
+sum_percent<-sum_dissat*100/sum_total
+sum_percent_sat<-sum_sat*100/sum_total
+
+# How I feel about the way visits are managed and where they happen?
+prison_excel_sat_managed<-data.frame(prison_excel$Participant,prison_excel$Feeling_about_visits)
+unique_satisfied_managed<-unique(prison_excel_sat_managed)
+satisfied_table_managed<-table(unique_satisfied_managed[2],exclude = NULL)
+barplot(satisfied_table_managed,names.arg=c(1,2,3,4,5,"NA"),xlab="How I feel about the way visits are managed and where they happen", ylab="Number of Responses",col="cornflowerblue")
+
+# Percentage that gave rating 1-2 or 3-5 How I feel about the way visits are managed and where they happen?
+sum_dissat<-sum(satisfied_table_managed[1:2])
+sum_sat<-sum(satisfied_table_managed[3:5])
+sum_total<-sum(satisfied_table_managed[1:5])
+sum_percent<-sum_dissat*100/sum_total
+sum_percent_sat<-sum_sat*100/sum_total
+
+# Have you ever had a parent in prison?
+prison_excel_parent<-data.frame(prison_excel$Participant,prison_excel$Parent_in_prison)
+unique_parent<-unique(prison_excel_parent)
+table_parent<-table(unique_parent[2],exclude = NULL)
+names_NYN<-names(table_parent)
+barplot(table_parent,names.arg=c(names_NYN[1],names_NYN[2],toString(names_NYN[3])),xlab="Have you ever had a parent in prison?", ylab="Number of Responses",col="cornflowerblue")
+
+# Have your brother/ sister even been to prison?
+prison_excel_sibling<-data.frame(prison_excel$Participant,prison_excel$Sibling_in_prison)
+unique_sibling<-unique(prison_excel_sibling)
+table_sibling<-table(unique_sibling[2],exclude = NULL)
+names_NYN<-names(table_sibling)
+barplot(table_sibling,names.arg=c(names_NYN[1],names_NYN[2],toString(names_NYN[3])),xlab="Have your brother/ sister even been to prison?", ylab="Number of Responses",col="cornflowerblue")
+
+# Do you have children?
+prison_excel_children<-data.frame(prison_excel$Participant,prison_excel$Children)
+unique_children<-unique(prison_excel_children)
+table_children<-table(unique_children[2],exclude = NULL)
+names_NYN<-names(table_children)
+barplot(table_children,names.arg=c(names_NYN[1],names_NYN[2],toString(names_NYN[3])),xlab="Do you have children?", ylab="Number of Responses",col="cornflowerblue")
+
+# Do you have a partner?
+prison_excel_partner<-data.frame(prison_excel$Participant,prison_excel$Partner)
+unique_partner<-unique(prison_excel_partner)
+table_partner<-table(unique_partner[2],exclude = NULL)
+names_NYN<-names(table_partner)
+barplot(table_partner,names.arg=c(names_NYN[1],names_NYN[2],toString(names_NYN[3])),xlab="Do you have a partner?", ylab="Number of Responses",col="cornflowerblue")
+
+# Are you married?
+prison_excel_married<-data.frame(prison_excel$Participant,prison_excel$Married)
+unique_married<-unique(prison_excel_married)
+table_married<-table(unique_married[2],exclude = NULL)
+names_NYN<-names(table_married)
+barplot(table_married,names.arg=c(names_NYN[1],names_NYN[2],toString(names_NYN[3])),xlab="Are you married?", ylab="Number of Responses",col="cornflowerblue")
+
+# Are you male or female?
+prison_excel_gender<-data.frame(prison_excel$Participant,prison_excel$Gender)
+unique_gender<-unique(prison_excel_gender)
+table_gender<-table(unique_gender[2])
+names_NYN<-names(table_gender)
+barplot(table_gender,names.arg=c(names_NYN[1],names_NYN[2]),xlab="Are you male or female?", ylab="Number of Responses",col="cornflowerblue")
+
+# How old are you?
+prison_excel_age<-data.frame(prison_excel$Participant,prison_excel$Age)
+unique_age<-unique(prison_excel_age,exclude = NULL)
+table_age<-table(unique_age[2])
+names_NYN<-names(table_age)
+barplot(table_age,names.arg=c(names_NYN[1],names_NYN[2],names_NYN[3],names_NYN[4]),xlab="How old are you?", ylab="Number of Responses",col="cornflowerblue")
+
+# Which of these best describes how you got on at school?
+prison_excel_school<-data.frame(prison_excel$Participant,prison_excel$Schooling)
+unique_school<-unique(prison_excel_school,exclude = NULL)
+table_school<-sort(table(unique_school[2],exclude = NULL),decreasing=TRUE)
+names_NYN1<-names(table_school)
+names_NYN<-c("<JC","JC","LC",">LC","NA")
+barplot(table_school,names.arg=names_NYN,xlab="Highest level of educational attainment achieved - Prison population", ylab="Number of Responses",col="cornflowerblue")
+
+# Educational attainment of general population
+pop<-matrix(c(456896,499489,1032120,875114),ncol=4,byrow=TRUE)
+pop_percentage<-matrix(c(12.7,13.8,28.6,24.3),ncol=4,byrow=TRUE)
+general_pop_school<-as.table(pop_percentage)
+names_col<-c("<JC","JC","LC",">LC")
+colnames(general_pop_school) <- names_col
+barplot(general_pop_school,names.arg=names_col,xlab="Highest level of educational attainment achieved - General population", ylab="Number of Responses (% of population)",col="cornflowerblue")
+
+# Percentage of general population who achieved below/above Junior Cert level
+gen_sum_percent_JC<-sum(pop_percentage[1:2])
+gen_sum_percent_LC<-sum(pop_percentage[3:4])
+
+# Educational attainment of prison population
+prison_excel_age_children<-data.frame(prison_excel$Participant,prison_excel$Child_age)
+yes_child<-prison_excel_age
+table_school<-sort(table(unique_school[2],exclude = NULL),decreasing=TRUE)
+names_NYN1<-names(table_school)
+names_NYN<-c("<JC","JC","LC",">LC","NA")
+barplot(table_school,names.arg=names_NYN,xlab="Highest level of educational attainment achieved - Prison population", ylab="Number of Responses",col="cornflowerblue")
+
+# Percentage of prison population who achieved below/above Junior Cert level
+sum_JC<-sum(table_school[1:2])
+sum_LC<-sum(table_school[3:4])
+sum_total<-sum(table_school[1:4])
+sum_percent_JC<-sum_JC*100/sum_total
+sum_percent_LC<-sum_LC*100/sum_total
+sum_percent_primary<-table_school[1]*100/sum_total
